@@ -19,5 +19,7 @@ namespace NGK_Assignment_3.Model
 
         public double Pressure { get; set; }
 
+        public ApplicationUser User { get; set; }
+
     }
 }
