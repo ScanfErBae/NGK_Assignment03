@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Web Api JWT Example</title>
+    <title>Meteorologisk Institut</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <h1>Example of using JWT to secure a Web Api using ASP.NET Core 2.0</h1>
+    <h1>Meteorologisk Institut</h1>
     <div style="margin: 50px auto; width:600px;">
         <div id="btLoginContainer">
             <input type="text" name="email" id="username" placeholder="email" />
@@ -21,15 +21,25 @@
             <button id="btLogin">Login</button><br>
             <label>(Use email as username)</label>
         </div>
+        <div id="btRegisterContainer">
+            <input type="text" name="email" id="username" placeholder="email" />
+            <input type="password" name="RegisterPassword" id="RegisterPassword" placeholder="Password" />
+            <button id="btRegister">Register</button><br>
+            <label>(Use email as username)</label>
+        </div>
+
+        <div id="btShowMeasurementContainer">
+            <button id="btShowMeasurements">Show Measurements</button>
+        </div>
+        
+        <div id="btPostMeasurementContainer">
+            <button id="btPostMeasurements">Post Measurements</button>
+        </div>
+
         <div id="btLogoutContainer">
             <button id="btLogout">Logout</button>
         </div>
-        <div id="btReservationContainer">
-            <label>Action that requires the user to be authenticated: </label>
-            <label>Location:</label>
-            <input type="text" name="location" id="location" placeholder="Room to reserve" />
-            <button id="btBookLocation">Book location</button>
-        </div>
+        
     </div>
     <div style="margin: 50px; background: lightgray" id="responseContainer">
 
@@ -99,6 +109,7 @@
             $('#btLogout').click(function () {
                 localStorage.removeItem("token");
                 $('#btLogoutContainer').hide();
+                $('#btRegisterContainer').show();
                 $('#btLoginContainer').show();
                 $('#responseContainer').html("<p>Token deleted from local storage</p>");
             });
@@ -118,18 +129,22 @@
                     .fail(handleError)
             });
 
-            var addTableRow = function (reservation) {
-                $("table tbody").append("<tr><td>" + reservation.reservationId + "</td><td>"
-                    + reservation.client.name + "</td><td>"
-                    + reservation.location + "</td></tr>");
+            var addTableRow = function (measurement) {
+                $("table tbody").append("<tr><td>" + measurement.measurementId + "</td><td>"
+                    + measurement.user.name + "</td><td>"
+                    + measurement.location + "</td></tr>");
             }
 
             if (isUserLoggedIn()) {
                 $('#btLoginContainer').hide();
+                $('#btRegisterContainer').hide();
                 $('#btLogoutContainer').show();
+                $('#btPostMeasurementContainer').show();
             } else {
                 $('#btLoginContainer').show();
+                $('#btRegisterContainer').show();
                 $('#btLogoutContainer').hide();
+                $('#btPostMeasurementContainer').hide();
             }
         });
     </script>

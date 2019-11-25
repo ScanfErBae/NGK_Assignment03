@@ -10,8 +10,8 @@ using NGK_Assignment_3.Data;
 namespace NGK_Assignment_3.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20191118092937_Initial")]
-    partial class Initial
+    [Migration("20191125140855_Jesper")]
+    partial class Jesper
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,6 +75,9 @@ namespace NGK_Assignment_3.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -114,6 +117,8 @@ namespace NGK_Assignment_3.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -184,7 +189,7 @@ namespace NGK_Assignment_3.Migrations
 
             modelBuilder.Entity("NGK_Assignment_3.Model.Measurement", b =>
                 {
-                    b.Property<int>("MeasurementID")
+                    b.Property<long>("MeasurementID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -192,23 +197,26 @@ namespace NGK_Assignment_3.Migrations
 
                     b.Property<int>("Humidity");
 
-                    b.Property<int>("MeasurementLocationID");
+                    b.Property<long>("MeasurementLocationId");
 
                     b.Property<double>("Pressure");
 
                     b.Property<double>("Temp");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("MeasurementID");
 
-                    b.HasIndex("MeasurementLocationID")
-                        .IsUnique();
+                    b.HasIndex("MeasurementLocationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Measurements");
                 });
 
             modelBuilder.Entity("NGK_Assignment_3.Model.MeasurementLocation", b =>
                 {
-                    b.Property<int>("MeasurementLocationID")
+                    b.Property<long>("MeasurementLocationId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -218,9 +226,18 @@ namespace NGK_Assignment_3.Migrations
 
                     b.Property<string>("Name");
 
-                    b.HasKey("MeasurementLocationID");
+                    b.HasKey("MeasurementLocationId");
 
                     b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("NGK_Assignment_3.Model.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Name");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -271,9 +288,13 @@ namespace NGK_Assignment_3.Migrations
             modelBuilder.Entity("NGK_Assignment_3.Model.Measurement", b =>
                 {
                     b.HasOne("NGK_Assignment_3.Model.MeasurementLocation", "Location")
-                        .WithOne("Measurement")
-                        .HasForeignKey("NGK_Assignment_3.Model.Measurement", "MeasurementLocationID")
+                        .WithMany("MeasurementsList")
+                        .HasForeignKey("MeasurementLocationId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NGK_Assignment_3.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

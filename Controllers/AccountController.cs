@@ -40,7 +40,7 @@ namespace NGK_Assignment_3.Controllers
         {
             var newUser = new ApplicationUser
             {
-                UserName = dtoUser.Email,
+                UserName = dtoUser.UserName,
                 Email = dtoUser.Email,
                 Name = dtoUser.Name,
             };
@@ -107,5 +107,13 @@ namespace NGK_Assignment_3.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        [Route("api/[controller]")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
     }
 }

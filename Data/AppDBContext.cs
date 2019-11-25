@@ -19,4 +19,8 @@ namespace NGK_Assignment_3.Data
 
        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
+
+
 }
+
+

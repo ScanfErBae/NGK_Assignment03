@@ -14,11 +14,10 @@ namespace NGK_Assignment_3.Model
     public class MeasurementLocation
     {
        [Key]
-        public int MeasurementLocationID { get; set; }
+       public long MeasurementLocationId { get; set; }
         public string Name { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set;  }
-
-        public Measurement Measurement { get; set; }
+        public List<Measurement> MeasurementsList { get; set; }
     }
 }

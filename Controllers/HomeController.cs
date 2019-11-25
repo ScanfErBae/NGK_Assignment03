@@ -10,6 +10,7 @@ namespace NGK_Assignment_3.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("api/[controller]")]
         public IActionResult Index()
         {
             return View();

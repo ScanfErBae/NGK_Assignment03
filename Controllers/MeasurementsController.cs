@@ -15,17 +15,45 @@ namespace NGK_Assignment_3.Controllers
     [Produces("application/json")]
     [Route("api/Measurement")]
     [Authorize]
-    public class MeasurementsController : ControllerBase
+    public class MeasurementController : ControllerBase
     {
+        private IRepository _repository;
+        public MeasurementController(IRepository repo)
+        {
+            _repository = repo;
+        }
+
+        [HttpGet]
+        public IEnumerable<Measurement> Get() => _repository.Measurements;
+
+        [HttpGet("{id}")]
+        public Measurement Get(int id) => _repository[id];
+
+        [HttpPost]
+        public Measurement Post([FromBody] Measurement res) =>
+            _repository.AddMeasurement(new Measurement
+            {
+                User = res.User,
+                MeasurementLocationId = res.MeasurementLocationId,
+                Humidity = res.Humidity,
+                Date = res.Date,
+                Temp = res.Temp,
+                Pressure = res.Pressure
+            });
+        
+
+        [HttpPut]
+        public Measurement Put([FromBody] Measurement res) =>
+            _repository.UpdateMeasurement(res);
+
+        [HttpDelete("{id}")]
+        public void Delete(int id) => _repository.DeleteMeasurement(id);
+
+
         private readonly AppDBContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public MeasurementsController(AppDBContext context, UserManager<ApplicationUser> userManager)
-        {
-            _context = context;
-            _userManager = userManager;
-        }
-
+        
         // GET: api/Measurements
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Measurement>>> GetMeasurements()
