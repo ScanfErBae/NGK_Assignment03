@@ -21,13 +21,7 @@
             <button id="btLogin">Login</button><br>
             <label>(Use email as username)</label>
         </div>
-        <div id="btRegisterContainer">
-            <input type="text" name="email" id="username" placeholder="email" />
-            <input type="password" name="RegisterPassword" id="RegisterPassword" placeholder="Password" />
-            <button id="btRegister">Register</button><br>
-            <label>(Use email as username)</label>
-        </div>
-
+       
         <div id="btShowMeasurementContainer">
             <button id="btShowMeasurements">Show Measurements</button>
         </div>
@@ -114,13 +108,13 @@
                 $('#responseContainer').html("<p>Token deleted from local storage</p>");
             });
 
-            $('#btBookLocation').click(function () {
+            $('#btPostMeasurement').click(function () {
                 $.ajax({
-                    url: "api/booking",
+                    url: "api/Measurement",
                     contentType: "application/json",
                     method: "POST",
                     data: JSON.stringify({
-                        location: $('#location').val()
+                        location: $('#Measurement').val()
                     })
                 })
                     .done(function (data) {

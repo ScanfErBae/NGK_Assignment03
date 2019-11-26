@@ -74,7 +74,8 @@ namespace NGK_Assignment_3
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<ApplicationUser> userManager, AppDBContext context,
+            ILogger<Startup> log)
         {
             if (env.IsDevelopment())
             {
@@ -87,9 +88,14 @@ namespace NGK_Assignment_3
                     .AllowAnyHeader()
                     .AllowCredentials()
             );
+
+            DBHelper.SeedData(context, userManager, log);
             app.UseAuthentication();
 
             app.UseMvc();
         }
+
+
+
     }
 }
