@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "ViewMeasurements";
+}
+
+
+@{
+    ViewData["Title"] = "Music";
+}
+
+
+
+<h1>ViewMeasurements</h1>
+
+// Get all Measurements arrangements
+fetch('/api/Measurements').then(function (response) {
+if (response.status !== 200) {
+console.log('Looks like there was a problem. Status Code: ' + response.status);
+return;
+}
+// Build the html
+
+//MANGLER KODE HER
