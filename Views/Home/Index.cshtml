@@ -16,89 +16,120 @@
     <h1>Meteorologisk Institut</h1>
     <div style="margin: 50px auto; width:600px;">
         <div id="btLoginContainer">
-            <input type="text" name="email" id="username" placeholder="email" />
-            <input type="password" name="password" id="password" placeholder="Password" />
-            <button id="btLogin">Login</button><br>
+            <input type="text" name="email" id="username" v-model="email"  placeholder="email" />
+            <input type="password" name="password" id="password" v-model="password" placeholder="Password" />
+            <button id="btLogin" onclick="loginFunction();">Login</button><br>
             <label>(Use email as username)</label>
         </div>
-       
-        <div id="btShowMeasurementContainer">
-            <button id="btShowMeasurements">Show Measurements</button>
-        </div>
-        
-        <div id="btPostMeasurementContainer">
-            <button id="btPostMeasurements">Post Measurements</button>
-        </div>
+
 
         <div id="btLogoutContainer">
             <button id="btLogout">Logout</button>
         </div>
-        
+
+        <div id="btRegisterContainer">
+            <input type="text" name="email" id="usernameReg" placeholder="email" />
+            <input type="password" name="RegisterPassword" id="RegisterPassword" placeholder="Password" />
+            <button id="btRegister" onclick="registerFunction();">Register</button><br>
+            <label>(Use email as username)</label>
+        </div>
+
+        <div id="btShowMeasurementContainer">
+            <button id="btShowMeasurements">Show Measurements</button>
+        </div>
+
+        <div id="btPostMeasurementContainer">
+            <button id="btPostMeasurements">Post Measurements</button>
+        </div>
     </div>
-    <div style="margin: 50px; background: lightgray" id="responseContainer">
 
-    </div>
+<script>
 
-    <table class="table table-condensed table-striped table-bordered">
-        <thead><tr><th>ID</th><th>Client</th><th>Location</th></tr></thead>
-        <tbody>
-            @*@foreach (var r in Model) {
-                <tr>
-                    <td>@r.ReservationId</td>
-                    <td>@r.ClientName</td>
-                    <td>@r.Location</td>
-                </tr>}*@
-        </tbody>
-    </table>
+    function data() {
+        return {
+            email: null,
+            password: null
+        }
+    }
 
-    <script>
-        function handleError(xhr, textStatus, errorThrown) {
-            if (xhr.status == 401)
-                $('#responseContainer').html("Unauthorized request");
-            else {
-                var message = "<p>Status code: " + xhr.status + "</p>";
-                message += "<pre>" + xhr.responseText + "</pre>";
-                $('#responseContainer').html(message);
+    function handleError(xhr, textStatus, errorThrown) {
+        if (xhr.status == 401)
+            $('#responseContainer').html("Unauthorized request");
+        else {
+            var message = "<p>Status code: " + xhr.status + "</p>";
+            message += "<pre>" + xhr.responseText + "</pre>";
+            $('#responseContainer').html(message);
+        }
+    }
+
+    function isUserLoggedIn() {
+        return localStorage.getItem("token") !== null;
+    }
+
+    function getSavedToken() {
+        return localStorage.getItem("token");
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr) {
+            if (isUserLoggedIn()) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + getSavedToken());
             }
         }
+    });
 
-        function isUserLoggedIn() {
-            return localStorage.getItem("token") !== null;
-        }
 
-        function getSavedToken() {
-            return localStorage.getItem("token");
-        }
-
-        $.ajaxSetup({
-            beforeSend: function (xhr) {
-                if (isUserLoggedIn()) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + getSavedToken());
-                }
-            }
-        });
-
-        $(function () {
-            $('#btLogin').click(function () {
-                $.ajax({
-                    url: "/api/account/jwtlogin",
-                    contentType: "application/json",
-                    method: "POST",
-                    data: JSON.stringify({
-                        email: $('#username').val(),
-                        password: $('#password').val()
-                    })
+    function loginFunction() {
+        fetch('/api/Account/jwtlogin',
+            {
+                method: "POST",
+                data: JSON.stringify({
+                    email: this.email,
+                    password: this.password
+                }),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
                 })
-                    .done(function (token) {
-                        localStorage.setItem("token", token);
-                        $('#btLoginContainer').hide();
-                        $('#btLogoutContainer').show();
-                        var message = "<p>Token received and saved in local storage under the key 'token'</p>";
-                        message += "<p>Token Value: </p><p style='word-wrap:break-word'>" + token + "</p>";
-                        $('#responseContainer').html(message);
-                    })
-                    .fail(handleError);
-            });
+            }).then(res => res.json().then((token) => {
+                localStorage.setItem("token", token);
+            }).catch(error => console.error('Error:', error)));
+    }
+
+    function HandleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
+    function registerFunction() {
+        fetch('http://localhost:61310/api/Account/Register',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    Email: this.email,
+                    Password: this.password
+                }),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(this.HandleErrors)
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
+    }
+
+    $(function () {
+            //$('#btRegister').click(function () {
+            //    $.ajax({
+            //        url: "/api/account/Register",
+            //        contentType: "application/json",
+            //        method: "POST",
+            //        data: JSON.stringify({
+            //            email: $('#usernameReg').val(),
+            //            password: $('#RegisterPassword').val()
+            //        })
+            //    }).fail(handleError);
+            //});
 
             $('#btLogout').click(function () {
                 localStorage.removeItem("token");
@@ -110,17 +141,17 @@
 
             $('#btPostMeasurement').click(function () {
                 $.ajax({
-                    url: "api/Measurement",
-                    contentType: "application/json",
-                    method: "POST",
-                    data: JSON.stringify({
-                        location: $('#Measurement').val()
+                        url: "api/Measurement",
+                        contentType: "application/json",
+                        method: "POST",
+                        data: JSON.stringify({
+                            location: $('#Measurement').val()
+                        })
                     })
-                })
                     .done(function (data) {
                         addTableRow(data);
                     })
-                    .fail(handleError)
+                    .fail(handleError);
             });
 
             var addTableRow = function (measurement) {
@@ -141,6 +172,6 @@
                 $('#btPostMeasurementContainer').hide();
             }
         });
-    </script>
+        </script>
 </body>
 </html>

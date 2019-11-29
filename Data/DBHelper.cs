@@ -13,7 +13,6 @@ namespace NGK_Assignment_3.Data
     {
         public static void SeedData(AppDBContext db, UserManager<ApplicationUser> userManager, ILogger log)
         {
-
             SeedUsers(userManager, log);
         }
 
@@ -25,16 +24,10 @@ namespace NGK_Assignment_3.Data
 
             if (userManager.FindByNameAsync(adminEmail).Result == null)
             {
-                log.LogWarning("Seeding the admin user");
-                var user = new ApplicationUser
-                {
-                    UserName = adminEmail,
-                    Email = adminEmail,
-                    Name = "Admin"
-                };
-                IdentityResult result = userManager.CreateAsync
-                    (user, adminPassword).Result;
-               
+                var user = new ApplicationUser();
+                user.Email = adminEmail;
+                user.UserName = adminEmail;
+                IdentityResult result = userManager.CreateAsync(user, adminPassword).Result;
             }
         }
     }

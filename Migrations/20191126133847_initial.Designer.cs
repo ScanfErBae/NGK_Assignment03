@@ -10,8 +10,8 @@ using NGK_Assignment_3.Data;
 namespace NGK_Assignment_3.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20191125140855_Jesper")]
-    partial class Jesper
+    [Migration("20191126133847_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

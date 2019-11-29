@@ -40,9 +40,8 @@ namespace NGK_Assignment_3.Controllers
         {
             var newUser = new ApplicationUser
             {
-                UserName = dtoUser.UserName,
                 Email = dtoUser.Email,
-                Name = dtoUser.Name,
+                UserName = dtoUser.Email,
             };
             var userCreationResult = await _userManager.CreateAsync(newUser,dtoUser.Password);
             if (userCreationResult.Succeeded)
