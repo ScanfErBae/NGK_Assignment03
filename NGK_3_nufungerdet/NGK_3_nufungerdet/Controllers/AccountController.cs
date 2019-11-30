@@ -68,7 +68,7 @@ namespace NGK_3_nufungerdet.Controllers
             }
             var passwordSignInResult = await _signInManager.CheckPasswordSignInAsync(user, dtoUser.Password, false);
             if (passwordSignInResult.Succeeded)
-                return new ObjectResult(GenerateToken(dtoUser.Email));
+                return new ObjectResult(new {Token = GenerateToken(dtoUser.Email)});
             return BadRequest("Invalid login");
         }
 
