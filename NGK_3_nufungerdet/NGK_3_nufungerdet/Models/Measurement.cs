@@ -9,7 +9,7 @@ namespace NGK_3_nufungerdet.Models
     public class Measurement
     {
         public long MeasurementID { get; set; }
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
         [JsonIgnore]
         public Location Location { get; set; }
         public long LocationId { get; set; }
