@@ -97,12 +97,12 @@ namespace NGK_3_nufungerdet
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5000")
+
+            app.UseCors(cors =>
+                cors.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-            );
+                    .AllowAnyHeader());
+
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
             //if (env.IsDevelopment())

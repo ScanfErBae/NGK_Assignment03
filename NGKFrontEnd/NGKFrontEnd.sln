@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29324.140
+VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGK_3_nufungerdet", "NGK_3_nufungerdet\NGK_3_nufungerdet.csproj", "{7FA02C86-6F04-44EA-8669-CECF3B85FEE7}"
-EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NGKFrontEnd", "..\NGKFrontEnd\NGKFrontEnd\NGKFrontEnd.njsproj", "{334A4467-2077-4A70-A359-DA53C912A9BF}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NGKFrontEnd", "NGKFrontEnd\NGKFrontEnd.njsproj", "{334A4467-2077-4A70-A359-DA53C912A9BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7FA02C86-6F04-44EA-8669-CECF3B85FEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FA02C86-6F04-44EA-8669-CECF3B85FEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FA02C86-6F04-44EA-8669-CECF3B85FEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FA02C86-6F04-44EA-8669-CECF3B85FEE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{334A4467-2077-4A70-A359-DA53C912A9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{334A4467-2077-4A70-A359-DA53C912A9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{334A4467-2077-4A70-A359-DA53C912A9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C7386493-0824-4E34-8E67-13D887E5C632}
+		SolutionGuid = {29870FBF-F0CC-42CE-BFBD-AFBE1279F5B8}
 	EndGlobalSection
 EndGlobal
