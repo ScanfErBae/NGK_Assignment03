@@ -31,14 +31,7 @@ namespace NGK_3_nufungerdet.Controllers
             DateTime obj1 = new DateTime(year1, month1, day1);
             DateTime obj2 = new DateTime(year2, month2, day2);
 
-            DateRange range = new DateRange();
-
-            range.Start = obj1;
-            range.End = obj2;
-
-            //var measurement = await _context.Measurements.Where(m => m.Date.Day >= day1 && m.Date.Day <= day2 && m.Date.Month >= month1 && m.Date.Month <= month2).ToListAsync();
-            var measurement = await _context.Measurements.Where(m => m.Date.).ToListAsync();
-
+            var measurement = await _context.Measurements.Where(m => m.Date >= obj1 && m.Date <= obj2).ToListAsync();
 
             if (measurement == null)
             {

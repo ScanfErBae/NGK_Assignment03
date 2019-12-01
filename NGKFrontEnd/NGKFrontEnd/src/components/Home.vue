@@ -61,10 +61,13 @@
 
         <button class="get" @click="showDateRangeMeasurements">Show date range Measurements</button>
         <br />
-        <input type="text" v-model="day1" placeholder="Enter day" />
-        <input type="text" v-model="month1" placeholder="Enter month" />
-        <input type="text" v-model="day2" placeholder="Enter day" />
-        <input type="text" v-model="month2" placeholder="Enter month" />
+        <input type="text" v-model="day1" placeholder="Enter day1" />
+        <input type="text" v-model="month1" placeholder="Enter month1" />
+        <input type="text" v-model="year1" placeholder="Enter year1" />
+        <input type="text" v-model="day2" placeholder="Enter day2" />
+        <input type="text" v-model="month2" placeholder="Enter month2" />
+        <input type="text" v-model="year2" placeholder="Enter year2" />
+
         <br />
         <span v-html="infoDateRangeMeasurements">{{infoDateRangeMeasurements}}</span>
         <br />
@@ -89,8 +92,10 @@
                 month: null,
                 day1: null,
                 month1: null,
+                year1: null,
                 day2: null,
                 month2: null,
+                year2: null,
                 name: null,
                 email: null,
                 password: null,
@@ -187,7 +192,7 @@
                 })
             },
             showDateRangeMeasurements() {
-                this.$http.get('https://localhost:44384/api/MeasurementsDateRangeController/DateRange?day1=' + this.day1 + '&month1=' + this.month1 + 'day2=' + this.day2 + '&month2=' + this.month2, {
+                this.$http.get('https://localhost:44384/api/MeasurementsDateRange/DateRange?day1=' + this.day1 + '&month1=' + this.month1 + '&year1=' + this.year1 + '&day2=' + this.day2 + '&month2=' + this.month2 + '&year2=' + this.year2, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
