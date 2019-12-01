@@ -35,7 +35,7 @@ namespace NGK_3_nufungerdet.Controllers
         // GET: api/Measurements/5
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Measurement>> GetMeasurement(long id)
+        public async Task<ActionResult<Measurement>> GetIdSpecificMeasurement(long id)
         {
             var measurement = await _context.Measurements.FindAsync(id);
 
@@ -88,7 +88,7 @@ namespace NGK_3_nufungerdet.Controllers
             //_context.Locations.Update(location[0]);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMeasurement", new { id = measurement.MeasurementID }, measurement);
+            return CreatedAtAction("GetMeasurements", new { id = measurement.MeasurementID }, measurement);
         }
 
         // POST: api/Measurements
@@ -105,7 +105,7 @@ namespace NGK_3_nufungerdet.Controllers
             //_context.Locations.Update(location[0]);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMeasurement", new { id = measurement.MeasurementID }, measurement);
+            return CreatedAtAction("GetMeasurements", new { id = measurement.MeasurementID }, measurement);
         }
 
         // DELETE: api/Measurements/5
@@ -128,55 +128,5 @@ namespace NGK_3_nufungerdet.Controllers
         {
             return _context.Measurements.Any(e => e.MeasurementID == id);
         }
-
-
-        [HttpGet("{Recent}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<List<Measurement>>> GetMeasurement()
-        {
-            var measurement = await _context.Measurements.OrderByDescending(m=>m.Date).Take(3).ToListAsync();
-
-            if (measurement == null)
-            {
-                return NotFound();
-            }
-
-            return measurement;
-        }
-
-
-        [HttpGet("{DateSpecific}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<List<Measurement>>> GetMeasurement(int day, int month)
-        {
-            var measurement = await _context.Measurements.Where(m => m.Date.Day == day && m.Date.Month == month).ToListAsync();
-
-            if (measurement == null)
-            {
-                return NotFound();
-            }
-
-            return measurement;
-        }
-
-        [HttpGet("{DateRange}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<List<Measurement>>> GetMeasurement(int day1, int month1, int day2, int month2)
-        {
-            //var measurement = await _context.Measurements.Where(m => m.Date.Day >= day1 && m.Date.Day <= day2 && m.Date.Month >= month1 && m.Date.Month <= month2).ToListAsync();
-            var measurement = await _context.Measurements.Where(m => m.Date.).ToListAsync();
-
-            if (measurement == null)
-            {
-                return NotFound();
-            }
-
-            return measurement;
-        }
-
-
-
-
-
     }
 }
