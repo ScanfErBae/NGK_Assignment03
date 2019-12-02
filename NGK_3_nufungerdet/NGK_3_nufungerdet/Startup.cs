@@ -71,6 +71,7 @@ namespace NGK_3_nufungerdet
                 };
             });
             services.AddSingleton<IRepository, MemoryRepository>();
+            //services.AddSignalR();
             services.AddCors();
             services.AddMvc();
             //services.Configure<CookiePolicyOptions>(options =>
@@ -103,6 +104,7 @@ namespace NGK_3_nufungerdet
                     .AllowAnyMethod()
                     .AllowAnyHeader());
 
+            //app.UseSignalR(Route => { Route.MapHub<ChatHub>("/chatHub"); });
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
             //if (env.IsDevelopment())
