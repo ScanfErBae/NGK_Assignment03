@@ -46,12 +46,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/measurements",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/measurements",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"measurements"
@@ -98,12 +98,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/locations",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/locations",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"locations"
@@ -138,12 +138,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/locations",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/locations",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"locations"
@@ -178,12 +178,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/measurements",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/measurements",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"measurements"
@@ -243,12 +243,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/account/register",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/account/register",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"account",
@@ -304,12 +304,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/account/login",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/account/login",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"account",
@@ -380,12 +380,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/locations",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/locations",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"locations"
@@ -462,12 +462,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/measurements",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/measurements",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"measurements"
@@ -523,12 +523,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/measurements/3",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/measurements/3",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"measurements",
@@ -585,12 +585,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/api/MeasurementsRecent/Recent",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/MeasurementsRecent/Recent",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"MeasurementsRecent",
@@ -666,12 +666,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/MeasurementsDateSpecific/DateSpecific?day=30&month=11",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/MeasurementsDateSpecific/DateSpecific?day=30&month=11",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"MeasurementsDateSpecific",
@@ -757,12 +757,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/MeasurementsDateRange/DateRange?day1=29&month1=10&year1=2019&day2=01&month2=12&year2=2019",
-					"protocol": "http",
+					"raw": "https://localhost:44384/api/MeasurementsDateRange/DateRange?day1=29&month1=10&year1=2019&day2=01&month2=12&year2=2019",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "44384",
 					"path": [
 						"api",
 						"MeasurementsDateRange",
