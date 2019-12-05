@@ -1,0 +1,803 @@
+{
+	"info": {
+		"_postman_id": "934383a6-7128-40aa-9649-00078c838f58",
+		"name": "ngk_3_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9000/api/measurements",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementID\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"locationId\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"temp\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"humidity\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"pressure\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44384/api/measurements",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"measurements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/api/measurements",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementLocationId\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"name\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44384/api/locations",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unauthorized when no authentication and posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44384/api/locations",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unauthorized when no authentication and posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44384/api/measurements",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"measurements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d90dee38-99df-4900-b13e-e8b33c198aa5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"email\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"name\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"password\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"testemail2@test.test\",\n\t\"name\":\"testtesttest\",\n\t\"password\":\"testtesttest\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44384/api/account/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"account",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d90dee38-99df-4900-b13e-e8b33c198aa5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"token\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"testemail2@test.test\",\n\t\"name\":\"testtesttest\",\n\t\"password\":\"testtesttest\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44384/api/account/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "can post location when logged in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string 'name'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"name\");",
+							"});",
+							"pm.test(\"Body matches string 'latitude'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+							"});",
+							"pm.test(\"Body matches string 'longitude'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+							"});",
+							"pm.test(\"Body matches string 'measurementLocationId'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementLocationId\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGVtYWlsMkB0ZXN0LnRlc3QiLCJuYmYiOiIxNTc1Mjc5MzMzIiwiZXhwIjoiMTU3NTM2NTczMyJ9.EyRFXamBXa4BaPHdGoY-IRUUCJ1RPagjl3TSiiHXjpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"testsite\",\n\t\"latitude\":1.222,\n\t\"longitude\":13.464\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44384/api/locations",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "can post measurement when logged in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string 'pressure'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"pressure\");",
+							"});",
+							"pm.test(\"Body matches string 'humidity'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"humidity\");",
+							"});",
+							"pm.test(\"Body matches string 'temp'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"temp\");",
+							"});",
+							"pm.test(\"Body matches string 'locationId'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"locationId\");",
+							"});",
+							"pm.test(\"Body matches string 'measurementID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementID\");",
+							"});",
+							"pm.test(\"Body matches string 'date'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"date\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGVtYWlsMkB0ZXN0LnRlc3QiLCJuYmYiOiIxNTc1Mjc5MzMzIiwiZXhwIjoiMTU3NTM2NTczMyJ9.EyRFXamBXa4BaPHdGoY-IRUUCJ1RPagjl3TSiiHXjpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"locationid\":4,\n\t\"temp\":13.5,\n\t\"humidity\":44,\n\t\"pressure\":104\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44384/api/measurements",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"measurements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/api/measurements Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string 'measurementID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementID\");",
+							"});",
+							"pm.test(\"Body matches string 'date'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"date\");",
+							"});",
+							"pm.test(\"Body matches string 'locationId'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"locationId\");",
+							"});",
+							"pm.test(\"Body matches string 'temp'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"temp\");",
+							"});",
+							"pm.test(\"Body matches string 'humidity'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"humidity\");",
+							"});",
+							"pm.test(\"Body matches string 'pressure'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"pressure\");",
+							"});",
+							"pm.test(\"Body contains one json object\", function () {",
+							"    pm.expect(Object.keys(pm.response.json()).length).to.eql(6);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44384/api/measurements/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"measurements",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/api/MeasurementsRecent/Recent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string 'measurementID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementID\");",
+							"});",
+							"pm.test(\"Body matches string 'date'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"date\");",
+							"});",
+							"pm.test(\"Body matches string 'locationId'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"locationId\");",
+							"});",
+							"pm.test(\"Body matches string 'temp'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"temp\");",
+							"});",
+							"pm.test(\"Body matches string 'humidity'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"humidity\");",
+							"});",
+							"pm.test(\"Body matches string 'pressure'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"pressure\");",
+							"});",
+							"pm.test(\"Body contains one json object\", function () {",
+							"    pm.expect(Object.keys(pm.response.json()).length).to.eql(3);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44384/api/MeasurementsRecent/Recent",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"MeasurementsRecent",
+						"Recent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/api/MeasurementsDateSpecific/DateSpecific?day=30&month=11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string 'measurementID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementID\");",
+							"});",
+							"pm.test(\"Body matches string 'date'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"date\");",
+							"});",
+							"pm.test(\"Body matches string 'locationId'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"locationId\");",
+							"});",
+							"pm.test(\"Body matches string 'temp'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"temp\");",
+							"});",
+							"pm.test(\"Body matches string 'humidity'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"humidity\");",
+							"});",
+							"pm.test(\"Body matches string 'pressure'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"pressure\");",
+							"});",
+							"pm.test(\"Body contains one json object\", function () {",
+							"    pm.expect(Object.keys(pm.response.json()).length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44384/api/MeasurementsDateSpecific/DateSpecific?day=30&month=11",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"MeasurementsDateSpecific",
+						"DateSpecific"
+					],
+					"query": [
+						{
+							"key": "day",
+							"value": "30"
+						},
+						{
+							"key": "month",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/api/MeasurementsDateRange/DateRange?day1=29&month1=10&year1=2019&day2=01&month2=12&year2=2019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eba54a34-6081-45c6-ac67-92ab3b215ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body matches string 'measurementID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"measurementID\");",
+							"});",
+							"pm.test(\"Body matches string 'date'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"date\");",
+							"});",
+							"pm.test(\"Body matches string 'locationId'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"locationId\");",
+							"});",
+							"pm.test(\"Body matches string 'temp'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"temp\");",
+							"});",
+							"pm.test(\"Body matches string 'humidity'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"humidity\");",
+							"});",
+							"pm.test(\"Body matches string 'pressure'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"pressure\");",
+							"});",
+							"pm.test(\"Body contains one json object\", function () {",
+							"    pm.expect(Object.keys(pm.response.json()).length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44384/api/MeasurementsDateRange/DateRange?day1=29&month1=10&year1=2019&day2=01&month2=12&year2=2019",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44384",
+					"path": [
+						"api",
+						"MeasurementsDateRange",
+						"DateRange"
+					],
+					"query": [
+						{
+							"key": "day1",
+							"value": "29"
+						},
+						{
+							"key": "month1",
+							"value": "10"
+						},
+						{
+							"key": "year1",
+							"value": "2019"
+						},
+						{
+							"key": "day2",
+							"value": "01"
+						},
+						{
+							"key": "month2",
+							"value": "12"
+						},
+						{
+							"key": "year2",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
