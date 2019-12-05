@@ -1,6 +1,24 @@
 <template>
     <div class="home">
-
+        <!--<input type="text" v-model="name" placeholder="Name">
+    <input type="text" v-model="email" placeholder="Email">
+    <input type="password" v-model="password" placeholder="Password">
+    <br />
+    <button class="get" @click="register">Register</button>
+    <br />
+    <br />
+    <br />
+    <input type="text" v-model="name1" placeholder="Name">
+    <input type="text" v-model="email1" placeholder="Email">
+    <input type="password" v-model="password1" placeholder="Password">
+    <br />
+    <button class="get" @click="login">Login</button>
+    <br />
+    <br />
+    <br />
+    <input type="text" v-model="name2" placeholder="Name">
+    <input type="text" v-model="lat" placeholder="Lat">
+    <input type="text" v-model="long" placeholder="Long">-->
         <br />
         <button class="get" @click="showLocations">Show all Locations</button>
         <br />
@@ -53,13 +71,6 @@
         <br />
         <span v-html="infoDateRangeMeasurements">{{infoDateRangeMeasurements}}</span>
         <br />
-
-        <div>
-            <p v-if="isConnected">We're connected to the server!</p>
-            <p>Message from server: "{{socketMessage}}"</p>
-            <button @click="pingServer()">Ping Server</button>
-        </div>
-
     </div>
 </template>
 
@@ -68,8 +79,6 @@
         name: 'Home',
         data: function () {
             return {
-                isConnected: false,
-                socketMessage: '',
                 infoLocation: null,
                 infoSpeceficLocation: null,
                 infoSpeceficMeasurements: null,
@@ -95,24 +104,7 @@
                 lat: null,
                 long: null,
                 email1: null,
-                password1: null,
-                message: "",
-                response: 'Server has not yet replied.',
-            }
-        },
-        sockets: {
-            connect() {
-                // Fired when the socket connects.
-                this.isConnected = true;
-            },
-
-            disconnect() {
-                this.isConnected = false;
-            },
-
-            // Fired when the server sends something on the "messageChannel" channel.
-            messageChannel(data) {
-                this.socketMessage = data
+                password1: null
             }
         },
         methods: {
@@ -121,10 +113,6 @@
                     throw Error(response.statusText);
                 }
                 return response;
-            },
-            pingServer() {
-                // Send the "pingServer" event to the server.
-                this.$socket.emit('pingServer', 'PING!')
             },
             register() {
                 fetch('https://localhost:44384/api/Account/Register', {
@@ -221,7 +209,7 @@
                     this.infoRecentMeasurements = response.data;
                 })
             },
-        },
+        }
     };
 </script>
 
