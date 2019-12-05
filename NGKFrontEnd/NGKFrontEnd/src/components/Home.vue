@@ -1,24 +1,5 @@
 <template>
     <div class="home">
-        <!--<input type="text" v-model="name" placeholder="Name">
-    <input type="text" v-model="email" placeholder="Email">
-    <input type="password" v-model="password" placeholder="Password">
-    <br />
-    <button class="get" @click="register">Register</button>
-    <br />
-    <br />
-    <br />
-    <input type="text" v-model="name1" placeholder="Name">
-    <input type="text" v-model="email1" placeholder="Email">
-    <input type="password" v-model="password1" placeholder="Password">
-    <br />
-    <button class="get" @click="login">Login</button>
-    <br />
-    <br />
-    <br />
-    <input type="text" v-model="name2" placeholder="Name">
-    <input type="text" v-model="lat" placeholder="Lat">
-    <input type="text" v-model="long" placeholder="Long">-->
         <br />
         <button class="get" @click="showLocations">Show all Locations</button>
         <br />
@@ -71,6 +52,7 @@
         <br />
         <span v-html="infoDateRangeMeasurements">{{infoDateRangeMeasurements}}</span>
         <br />
+
     </div>
 </template>
 
@@ -80,6 +62,8 @@
         data: function () {
             return {
                 infoLocation: null,
+                isConnected: false,
+                socketMessage: '',
                 infoSpeceficLocation: null,
                 infoSpeceficMeasurements: null,
                 infoDateSpeceficMeasurements: null,
@@ -107,7 +91,26 @@
                 password1: null
             }
         },
+        sockets: {
+            connect() {
+                // Fired when the socket connects.
+                this.isConnected = true;
+            },
+
+            disconnect() {
+                this.isConnected = false;
+            },
+
+    // Fired when the server sends something on the "messageChannel" channel.
+            messageChannel(data) {
+                this.socketMessage = data
+            }
+        },
         methods: {
+            pingServer() {
+                // Send the "pingServer" event to the server.
+                this.$socket.emit('pingServer', 'PING!')
+            },
             HandleErrors: function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
