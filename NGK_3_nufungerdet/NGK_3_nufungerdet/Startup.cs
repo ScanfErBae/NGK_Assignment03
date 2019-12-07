@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Logging.Debug;
 using Microsoft.IdentityModel.Tokens;
+using NGK_3_nufungerdet.hub;
 using NGK_3_nufungerdet.Models;
 
 namespace NGK_3_nufungerdet
@@ -90,6 +91,7 @@ namespace NGK_3_nufungerdet
 
             services.AddSingleton<IRepository, MemoryRepository>();
 
+            services.AddSignalR();
             services.AddMvc();
             //services.Configure<CookiePolicyOptions>(options =>
             //{
@@ -178,6 +180,11 @@ namespace NGK_3_nufungerdet
             #endregion
 
             app.UseFileServer();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
 
             app.UseMvcWithDefaultRoute();
 
