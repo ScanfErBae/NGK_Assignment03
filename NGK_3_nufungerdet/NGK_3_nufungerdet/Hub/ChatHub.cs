@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace NGK_3_nufungerdet.hub
 {
-    public class ChatHub : Hub
+    public class MeasurementHub : Hub
     {
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage()
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync("SendMeasurement");
         }
     }
 }

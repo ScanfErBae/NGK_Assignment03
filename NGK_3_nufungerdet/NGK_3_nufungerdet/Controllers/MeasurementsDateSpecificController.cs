@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using NGK_3_nufungerdet.Data;
+using NGK_3_nufungerdet.hub;
 using NGK_3_nufungerdet.Models;
 
 namespace NGK_3_nufungerdet.Controllers
@@ -17,11 +19,14 @@ namespace NGK_3_nufungerdet.Controllers
     public class MeasurementsDateSpecificController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<MeasurementHub> _MeasurementHub;
 
-        public MeasurementsDateSpecificController(ApplicationDbContext context)
+        public MeasurementsDateSpecificController(ApplicationDbContext context, IHubContext<MeasurementHub> measurementHub)
         {
+            _MeasurementHub = measurementHub;
             _context = context;
         }
+
 
         [HttpGet("{DateSpecific}")]
         [AllowAnonymous]

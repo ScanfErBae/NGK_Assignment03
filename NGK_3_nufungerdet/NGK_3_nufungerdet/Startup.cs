@@ -43,12 +43,11 @@ namespace NGK_3_nufungerdet
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDbContext<IdentityDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -68,47 +67,28 @@ namespace NGK_3_nufungerdet
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
-                    //ValidAudience = "the audience you want to validate",
                     ValidateIssuer = false,
                     //ValidIssuer = "the isser you want to validate",
-
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("the secret that needs to be at least 16 characeters long for HmacSha256")),
-
                     ValidateLifetime = true, //validate the expiration and not before values in the token
-
                     ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
                 };
             });
 
-            services.AddLogging(builder =>
-            {
-                builder.AddConsole()
-                    .AddDebug()
-                    .AddFilter<ConsoleLoggerProvider>(category: null, level: LogLevel.Debug)
-                    .AddFilter<DebugLoggerProvider>(category: null, level: LogLevel.Debug);
-            });
-
-            services.AddSingleton<IRepository, MemoryRepository>();
-
-            services.AddSignalR();
-            services.AddMvc();
-            //services.Configure<CookiePolicyOptions>(options =>
+            //services.AddLogging(builder =>
             //{
-            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            //    options.CheckConsentNeeded = context => true;
-            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //    builder.AddConsole()
+            //        .AddDebug()
+            //        .AddFilter<ConsoleLoggerProvider>(category: null, level: LogLevel.Debug)
+            //        .AddFilter<DebugLoggerProvider>(category: null, level: LogLevel.Debug);
             //});
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddDefaultUI(UIFramework.Bootstrap4)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+           services.AddSignalR();
+            services.AddMvc();
+         
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-        }
+            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -122,113 +102,17 @@ namespace NGK_3_nufungerdet
 
             app.UseAuthentication();
 
-#if NoOptions
-            #region UseWebSockets
-            app.UseWebSockets();
-            #endregion
-#endif
-#if UseOptions
-            #region UseWebSocketsOptions
-            var webSocketOptions = new WebSocketOptions()
+            app.UseEndpoints(endpoints =>
             {
-                KeepAliveInterval = TimeSpan.FromSeconds(120),
-                ReceiveBufferSize = 4 * 1024
-            };
-
-            app.UseWebSockets(webSocketOptions);
-            #endregion
-#endif
-
-#if UseOptionsAO
-            #region UseWebSocketsOptionsAO
-            var webSocketOptions = new WebSocketOptions()
-            {
-                KeepAliveInterval = TimeSpan.FromSeconds(120),
-                ReceiveBufferSize = 4 * 1024
-            };
-            webSocketOptions.AllowedOrigins.Add("https://client.com");
-            webSocketOptions.AllowedOrigins.Add("https://www.client.com");
-            webSocketOptions.AllowedOrigins.Add("http://localhost:1337");
-
-            app.UseWebSockets(webSocketOptions);
-            #endregion
-#endif
-
-
-
-            #region AcceptWebSocket
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "/ws")
-                {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await Echo(context, webSocket);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
-                }
-                else
-                {
-                    await next();
-                }
-
+                endpoints.MapHub<LiveUpdateHub>("/chatHub");
+                endpoints.MapControllers();
             });
-            #endregion
 
-            app.UseFileServer();
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<ChatHub>("/chatHub");
-            });
 
             app.UseMvcWithDefaultRoute();
 
-
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    app.UseDatabaseErrorPage();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
-
-            //app.UseHttpsRedirection();
-            //app.UseStaticFiles();
-            //app.UseCookiePolicy();
-
-            //app.UseAuthentication();
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
         }
-
-        #region Echo
-        private async Task Echo(HttpContext context, WebSocket webSocket)
-        {
-            var buffer = new byte[1024 * 4];
-            WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-            while (!result.CloseStatus.HasValue)
-            {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
-
-                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-            }
-            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
-        }
-        #endregion
 
     }
 }
